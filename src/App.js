@@ -1,7 +1,7 @@
 import './App.css';
 
 function Header(props) {
-  
+
   return (
     <header>
       <h1><a href="/" onClick={(event) => {
@@ -56,7 +56,7 @@ function App() {
       <Nav topics={topics} onChangeMode={(id) => {
         alert(id)
       }}></Nav>
-      <Article title="Welcome" body="Hello, Web"></Article>
+      <Article title="환영합니다" body="Hello, Web"></Article>
     </div>
   );
 }
