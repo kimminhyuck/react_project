@@ -52,12 +52,45 @@ function Create(props) {
         const body = event.target.body.value;
         props.onCreate(title, body);
       }}>
-        <p><input type="text" name="title" placeholder="title"></input></p>
-        <p><textarea name="body" placeholder="body"></textarea></p>
-        <p><input type="submit" value="Create"></input></p>
+        <p>
+          <input type="text" name="title" placeholder="title"></input>
+        </p>
+        <p>
+          <textarea name="body" placeholder="body"></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Create"></input>
+        </p>
       </form>
     </article>
   )
+}
+
+function Update(props) {
+  const [title, setTitle] = useState(props.title);
+  const [body, setBody] = useState(props.body);
+
+  return (
+    <article>
+      <h2>Update</h2>
+      <form onSubmit={event => {
+        event.preventDefault();
+        const updatedTitle = event.target.title.value;
+        const updatedBody = event.target.body.value;
+        props.onUpdate(updatedTitle, updatedBody);
+      }}>
+        <p>
+          <input type="text" name="title" placeholder="title" value={title} onChange={event => setTitle(event.target.value)}></input>
+        </p>
+        <p>
+          <textarea name="body" placeholder="body" value={body} onChange={event => setBody(event.target.value)}></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Update"></input>
+        </p>
+      </form>
+    </article>
+  );
 }
 
 function App() {
@@ -71,6 +104,8 @@ function App() {
     {id: 3, title: 'javascript', body: 'javascript is ...'}
   ]);
   let content = null;
+  let contextControl = null;
+
   if (mode === 'WELCOME') {
     content = <Article title="환영합니다" body="Hello, Web"></Article>
   } else if (mode === 'READ') {
@@ -84,13 +119,46 @@ function App() {
       }
     }
       content = <Article title={title} body={body}></Article>
+      contextControl = <>
+      <a href={"/update/" + id} onClick={event => {
+        event.preventDefault();
+        setMode('UPDATE');
+      }}>update</a> {" "}
+      <a href={"/delete/" + id} onClick={event => {
+        event.preventDefault();
+        const newTopics = topics.filter(topic => topic.id !== id);
+        setTopics(newTopics);
+        setMode('WELCOME');
+      }}>delete</a> {" "}
+    </>;
   }  else if (mode === 'CREATE') {
-    content = <Create onCreate={(_title, _body) =>{
-      const newTopic = {id:nextId, title:_title, body:_body}
+    content = <Create onCreate={(_title, _body) => {
+      const newTopic = { id: nextId, title: _title, body: _body };
       const newTopics = [...topics, newTopic];
       setTopics(newTopics);
       setNextId(nextId + 1);
+      setMode('READ');
+      setId(nextId);
     }}></Create>
+  } else if (mode === 'UPDATE') {
+    let title = null, body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+        break;
+      }
+    }
+    content = <Update title={title} body={body} onUpdate={(updatedTitle, updatedBody) => {
+      const updatedTopics = topics.map(topic => {
+        if (topic.id === id) {
+          return { id: id, title: updatedTitle, body: updatedBody };
+        }
+        return topic;
+      });
+      setTopics(updatedTopics);
+      setMode('READ');
+    }}></Update>;
   }
   return (
     <div>
@@ -102,10 +170,11 @@ function App() {
         setId(Number(id));
       }}></Nav>
       {content}
+      {contextControl}
       <a href="/create" onClick={(event) => {
         event.preventDefault()
         setMode('CREATE')
-      }}>create</a>
+      }}>create</a> {" "}
     </div>
   );
 }
