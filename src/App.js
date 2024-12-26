@@ -52,15 +52,9 @@ function Create(props) {
         const body = event.target.body.value;
         props.onCreate(title, body);
       }}>
-        <p>
-        <input type="text" name="title" placeholder="title"></input>
-        </p>
-        <p>
-        <textarea name="body" placeholder="body"></textarea>
-        </p>
-        <p>
-        <input type="submit" value="Create"></input>
-        </p>
+        <p><input type="text" name="title" placeholder="title"></input></p>
+        <p><textarea name="body" placeholder="body"></textarea></p>
+        <p><input type="submit" value="Create"></input></p>
       </form>
     </article>
   )
