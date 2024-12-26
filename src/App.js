@@ -1,7 +1,7 @@
 import './App.css';
+import { useState } from 'react';
 
 function Header(props) {
-
   return (
     <header>
       <h1><a href="/" onClick={(event) => {
@@ -43,20 +43,27 @@ function Article(props) {
 }
 
 function App() {
+  const [mode, setMode] = useState('WELCOME');
   const topics = [
     { id: 1, title: 'html', body: 'html is ...' },
     { id: 2, title: 'css', body: 'css is ...' },
     { id: 3, title: 'javascript', body: 'javascript is ...' }
   ]
+  let content = null;
+  if (mode === 'WELCOME') {
+      content = <Article title="환영합니다" body="Hello, Web"></Article>
+  } else if (mode === 'READ') {
+      content = <Article title="WELCOME" body="Hello, READ"></Article>
+  }
   return (
     <div>
       <Header title="WEB" onChangeMode={() => {
-        alert('Header')
+        setMode('WELCOME');
       }}></Header>
       <Nav topics={topics} onChangeMode={(id) => {
-        alert(id)
+          setMode('READ');
       }}></Nav>
-      <Article title="환영합니다" body="Hello, Web"></Article>
+      {content}
     </div>
   );
 }
