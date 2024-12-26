@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 function Header(props) {
   return (
-    <header>
+    <header className="header">
       <h1><a href="/" onClick={(event) => {
         event.preventDefault()
         props.onChangeMode()
@@ -25,7 +25,7 @@ function Nav(props) {
     </li>)
   }
   return (
-    <nav>
+    <nav className="nav">
       <ol>
         {lis}
       </ol>
@@ -35,7 +35,7 @@ function Nav(props) {
 
 function Article(props) {
   return (
-    <article>
+    <article className="article">
       <h2>{props.title}</h2>
       {props.body}
     </article>
@@ -44,7 +44,7 @@ function Article(props) {
 
 function Create(props) {
   return(
-    <article>
+    <article className="create">
       <h2>Create</h2>
       <form onSubmit={event => {
         event.preventDefault();
@@ -71,7 +71,7 @@ function Update(props) {
   const [body, setBody] = useState(props.body);
 
   return (
-    <article>
+    <article className="update">
       <h2>Update</h2>
       <form onSubmit={event => {
         event.preventDefault();
@@ -118,19 +118,31 @@ function App() {
         break;
       }
     }
-      content = <Article title={title} body={body}></Article>
-      contextControl = <>
-      <a href={"/update/" + id} onClick={event => {
-        event.preventDefault();
-        setMode('UPDATE');
-      }}>update</a> {" "}
-      <a href={"/delete/" + id} onClick={event => {
-        event.preventDefault();
-        const newTopics = topics.filter(topic => topic.id !== id);
-        setTopics(newTopics);
-        setMode('WELCOME');
-      }}>delete</a> {" "}
-    </>;
+    content = <Article title={title} body={body}></Article>
+    contextControl = (
+      <ul>
+        <li>
+          <a href={"/update/" + id} onClick={event => {
+            event.preventDefault();
+            setMode('UPDATE');
+          }}>update</a>
+        </li>
+        <li>
+          <a href={"/delete/" + id} onClick={event => {
+            event.preventDefault();
+            const newTopics = topics.filter(topic => topic.id !== id);
+            setTopics(newTopics);
+            setMode('WELCOME');
+          }}>delete</a>
+        </li>
+        <li>
+          <a href="/create" onClick={(event) => {
+            event.preventDefault()
+            setMode('CREATE')
+          }}>create</a>
+        </li>
+      </ul>
+    );
   }  else if (mode === 'CREATE') {
     content = <Create onCreate={(_title, _body) => {
       const newTopic = { id: nextId, title: _title, body: _body };
@@ -161,7 +173,7 @@ function App() {
     }}></Update>;
   }
   return (
-    <div>
+    <div className="app">
       <Header title="WEB" onChangeMode={() => {
         setMode('WELCOME');
       }}></Header>
@@ -171,10 +183,6 @@ function App() {
       }}></Nav>
       {content}
       {contextControl}
-      <a href="/create" onClick={(event) => {
-        event.preventDefault()
-        setMode('CREATE')
-      }}>create</a> {" "}
     </div>
   );
 }
