@@ -107,7 +107,7 @@ function App() {
   let contextControl = null;
 
   if (mode === 'WELCOME') {
-    content = <Article title="환영합니다" body="Hello, Web"></Article>
+    content = <Article title="집에서 작업완료" body="Hello, Web"></Article>
   } else if (mode === 'READ') {
     let title = null, body = null; 
     for (let i = 0; i < topics.length; i++) {
