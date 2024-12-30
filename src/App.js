@@ -142,14 +142,107 @@ function Right1(props) {
 }
 function Right2(props) {
   return (
-    <div>
-      <h1>Right2</h1>
-      <Right3></Right3>
-    </div>
-  )
+    <article className="update">
+      <h2>Update</h2>
+      <form onSubmit={event => {
+        event.preventDefault();
+        const updatedTitle = event.target.title.value;
+        const updatedBody = event.target.body.value;
+        props.onUpdate(updatedTitle, updatedBody);
+      }}>
+        <p>
+          <input type="text" name="title" placeholder="title" value={title} onChange={event => setTitle(event.target.value)}></input>
+        </p>
+        <p>
+          <textarea name="body" placeholder="body" value={body} onChange={event => setBody(event.target.value)}></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Update"></input>
+        </p>
+      </form>
+    </article>
+  );
 }
-function Right3(props) {
-  const dispatch = useDispatch();
+
+function App() {
+  const [mode, setMode] = useState('WELCOME');
+  const [id, setId] = useState(null);
+  const [nextId, setNextId] = useState(4);
+
+  const [topics, setTopics] = useState([
+    {id: 1, title: 'html', body: 'html is ...'},
+    {id: 2, title: 'css', body: 'css is ...'},
+    {id: 3, title: 'javascript', body: 'javascript is ...'}
+  ]);
+  let content = null;
+  let contextControl = null;
+
+  if (mode === 'WELCOME') {
+    content = <Article title="환영합니다" body="Hello, Web"></Article>
+  } else if (mode === 'READ') {
+    let title = null, body = null; 
+    for (let i = 0; i < topics.length; i++) {
+      console.log(topics[i].id, id);
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+        break;
+      }
+    }
+    content = <Article title={title} body={body}></Article>
+    contextControl = (
+      <ul>
+        <li>
+          <a href={"/update/" + id} onClick={event => {
+            event.preventDefault();
+            setMode('UPDATE');
+          }}>update</a>
+        </li>
+        <li>
+          <a href={"/delete/" + id} onClick={event => {
+            event.preventDefault();
+            const newTopics = topics.filter(topic => topic.id !== id);
+            setTopics(newTopics);
+            setMode('WELCOME');
+          }}>delete</a>
+        </li>
+        <li>
+          <a href="/create" onClick={(event) => {
+            event.preventDefault()
+            setMode('CREATE')
+          }}>create</a>
+        </li>
+      </ul>
+    );
+  }  else if (mode === 'CREATE') {
+    content = <Create onCreate={(_title, _body) => {
+      const newTopic = { id: nextId, title: _title, body: _body };
+      const newTopics = [...topics, newTopic];
+      setTopics(newTopics);
+      setNextId(nextId + 1);
+      setMode('READ');
+      setId(nextId);
+    }}></Create>
+  } else if (mode === 'UPDATE') {
+    let title = null, body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+        break;
+      }
+    }
+    content = <Update title={title} body={body} onUpdate={(updatedTitle, updatedBody) => {
+      const updatedTopics = topics.map(topic => {
+        if (topic.id === id) {
+          return { id: id, title: updatedTitle, body: updatedBody };
+        }
+        return topic;
+      });
+      setTopics(updatedTopics);
+      setMode('READ');
+    }}></Update>;
+  }
   return (
     <div>
       <h1>Right3</h1>
