@@ -5,7 +5,13 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div>
-      Hello World
+      <h2>/pages/index.js</h2>
+      <ul>
+        <li><a href='/sub'>/pages/sub/index.js</a></li>
+        <li><a href='/sub/about'>/pages/sub/about.js</a></li>
+        <li><a href='sub/1'>/pages/sub/[id].js</a></li>
+        <li><a href='sub/2'>/pages/sub/[id].js</a></li>
+      </ul>
     </div>
   );
 }
