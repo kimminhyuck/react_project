@@ -2,7 +2,7 @@ function Header() {
   return (
     <header>
       <h1>Header</h1>
-      </header>
-      )
+    </header>
+  )
 }
 export default Header;
