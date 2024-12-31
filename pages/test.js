@@ -363,12 +363,113 @@
 // }
 // func(person)
 
-function func({ name: n, age: a, location: l }) {
-  console.log(n, a, l)
-}
-let person = {
-  name: "이정환",
-  age: 25,
-  location: "경기도"
-}
-func(person)
+// function func({ name: n, age: a, location: l }) {
+//   console.log(n, a, l)
+// }
+// let person = {
+//   name: "이정환",
+//   age: 25,
+//   location: "경기도"
+// }
+// func(person)
+
+// let arrA = [1, 2, 3]
+// let arrB = [...arrA, 4, 5, 6]
+// console.log(arrB)
+
+// let arrA = [1, 2, 3]
+// let arrB = [arrA, 4, 5, 6]
+// console.log(arrB)
+
+// let objA = { a: 1, b: 2 }
+// let objB = { ...objA, c: 3, d: 4 }
+// console.log(objB)
+
+// function func(a, b, c) {
+//   console.log(a, b, c)
+// }
+// let arr = [1, 2, 3]
+// func(...arr)
+
+// function func(...r) {
+//   console.log(r)
+// }
+// func(1, 2, 3, 4)
+
+// function func(param, ...rest) {
+//   console.log(param)
+//   console.log(rest)
+// }
+// func(1, 2, 3, 4)
+
+// let food = ["짜장면", "피자", "치킨"]
+// //const newLength = food.push("탕수육")
+// const newLength = food.push("탕수육", "라자냐")
+
+// console.log(food);
+// console.log(`배열의 새 길이: ${newLength}`)
+
+// let food = ["짜장면", "피자", "치킨"]
+// const removedItem = food.pop()
+
+// console.log(removedItem)
+// console.log(food)
+
+// let food = []
+// const removedItem = food.pop()
+
+// console.log(removedItem)
+// console.log(food)
+
+// let food = ["짜장면", "피자", "치킨"]
+// const removedItem = food.shift()
+
+// console.log(removedItem)
+// console.log(food)
+
+// let food = ["짜장면", "피자", "치킨"]
+// //const newLength = food.unshift("갈비찜")
+// const newLength = food.unshift("갈비찜", "국수")
+
+// console.log(food)
+// console.log(`배열의 새 길이: ${newLength}`)
+
+// const arr = [1, 2, 3]
+// //const sliced = arr.slice(0, 2)
+// const sliced = arr.slice(2)
+
+// console.log(arr)
+// console.log(sliced)
+
+// const arr = [1, 2, 3, 4, 5]
+// console.log(arr.slice(-1))
+// console.log(arr.slice(-2))
+
+// let arrA = [1, 2]
+// let arrB = [3, 4]
+// let arrC = arrA.concat(arrB)
+
+// console.log(arrC)
+// console.log(arrA)
+
+// let arrA = [1, 2]
+// let arrB = { a: 1, b: 2 }
+// let arrC = arrA.concat(arrB)
+
+// console.log(arrC)
+
+// // function cb(item, idx) {
+// //   console.log(`${idx}번째 요소: ${item}`)
+// // }
+// const arr = [1, 2, 3]
+// // arr.forEach(cb)
+// arr.forEach((item, idx) => {
+//   console.log(`${idx}번째 요소: ${item}`)
+// })
+
+let arr = [1, 3, 5, 7, 1]
+console.log(arr.indexOf(1, 0));
+console.log(arr.indexOf(1));
+console.log(arr.indexOf(1,2));
+console.log(arr.indexOf(1, -2));
+
