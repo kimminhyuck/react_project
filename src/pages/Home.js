@@ -1,13 +1,29 @@
 import Button from "../component/Button";
+import Header from "../component/Header";
 
 const Home = () => {
   return (
     <div>
-      <Button
-        text={"버튼 텍스트"}
-        onClick={() => {
-          alert("hi")
-        }}
+      <Header
+        title={"Home"}
+        leftChild={
+          <Button
+            type="positive"
+            text={"긍정 버튼"}
+            onClick={() => {
+              alert("positive button")
+            }}
+          />
+        }
+        rightChild={
+          <Button
+            type="negative"
+            text={"부정 버튼"}
+            onClick={() => {
+              alert("negative button")
+            }}
+          />
+        }
       />
     </div>
   )
