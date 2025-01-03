@@ -47,7 +47,7 @@ export const emotionList = [
   {
     id: 3,
     name: "그럭저럭",
-    img: getEmotionImgById(1)
+    img: getEmotionImgById(3)
   },
   {
     id: 4,
