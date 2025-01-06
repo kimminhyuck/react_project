@@ -4,7 +4,7 @@ import Editor from "../component/Editor";
 
 const Home = () => {
   return (
-   <div>Home 페이지입니다람쥐렁이이.</div>
+   <div>Home 페이지입니다람쥐렁이</div>
   )
 }
 export default Home 
