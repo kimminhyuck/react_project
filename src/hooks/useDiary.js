@@ -15,7 +15,7 @@ const useDiary = (id) => {
       alert("일기가 존재하지 않습니다")
       navigate("/", { replace: true })
     }
-  }, [id, data, navigate])
+  }, [id, data])
 
   return diary;
 }

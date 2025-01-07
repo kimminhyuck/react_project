@@ -2,7 +2,7 @@ import { DiaryStateContext } from "../App"
 import Button from "../component/Button"
 import Header from "../component/Header"
 import { useContext, useEffect, useState } from "react"
-import { getMonthRangeByDate } from "../util"
+import { getMonthRangeByDate, setPageTitle } from "../util"
 import DiaryList from "../component/DiaryList"
 
 const Home = () => {
@@ -29,6 +29,10 @@ const Home = () => {
       setFilteredData([])
     }
   }, [data, pivotDate])
+
+  useEffect(() => {
+    setPageTitle("Z이 감정 일기장")
+  }, [])
 
   return (
     <div>
