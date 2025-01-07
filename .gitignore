@@ -2,6 +2,7 @@
 # Node.js 관련
 node_modules/
 *.log
+node_modules/
 
 # ESLint 캐시
 *.eslintcache
