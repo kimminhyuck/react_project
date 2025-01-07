@@ -20,7 +20,7 @@ const New = () => {
   return (
     <div>
       <Header
-        title={"새 일1기 쓰기"}
+        title={"새 일기 쓰기"}
         leftChild={<Button text={"< 뒤로 가기"} onClick={goBack} />}
       />
       <Editor onSubmit={onSubmit} />
